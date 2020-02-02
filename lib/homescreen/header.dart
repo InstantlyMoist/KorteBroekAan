@@ -6,7 +6,6 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-//      width: MediaQuery.of(context).size.width * 0.87,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -18,7 +17,7 @@ class Header extends StatelessWidget {
                 color: Color(0xFF2F4859)
               ),
           ),
-          SizedBox(height: 15),
+          SizedBox(height: 20),
           Row(
             children: <Widget>[
               Text(

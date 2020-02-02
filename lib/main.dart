@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kan_ik_een_korte_broek_aan/homescreen/header.dart';
 
 import 'homescreen/weatherimage.dart';
-import 'homescreen/weatherbar.dart';
+import 'homescreen/forecastbar/forecastbar.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
                       Spacer(),
                       WeatherImage(),
                       Spacer(),
-                      WeatherBar()
+                      ForecastBar()
                   ],
                 ),
             ),

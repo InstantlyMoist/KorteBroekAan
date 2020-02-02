@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kan_ik_een_korte_broek_aan/homescreen/forecastbar/forecastitem.dart';
 
-class WeatherBar extends StatelessWidget {
+class ForecastBar extends StatelessWidget {
+  List<String> days = ["ma","di","wo","do","vr","za","zo"];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,7 +22,9 @@ class WeatherBar extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[]
+          children: <Widget>[
+            for (String day in days) ForecastItem(day)
+          ]
         ),
     );
   }

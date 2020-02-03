@@ -1,9 +1,16 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kan_ik_een_korte_broek_aan/homescreen/forecastbar/forecastitem.dart';
 
+// ignore: must_be_immutable
 class ForecastBar extends StatelessWidget {
-  List<String> days = ["ma","di","wo","do","vr","za","zo"];
+  // Day names
+  Map<String, dynamic> data = jsonDecode("{\"di\": false, \"wo\": true, \"do\": true,\"vr\": false,\"za\": true,\"zo\": false,\"ma\": true}");
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +30,7 @@ class ForecastBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            for (String day in days) ForecastItem(day)
+            for (String day in data.keys) ForecastItem(day, data[day])
           ]
         ),
     );

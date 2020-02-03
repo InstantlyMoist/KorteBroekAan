@@ -5,14 +5,20 @@ import 'package:kan_ik_een_korte_broek_aan/homescreen/header.dart';
 import 'homescreen/weatherimage.dart';
 import 'homescreen/forecastbar/forecastbar.dart';
 
-void main() {
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
-    runApp(new MyApp());
-  });
+void main() => runApp(MyApp());
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
 }
 
-class MyApp extends StatelessWidget {
+class _MyAppState extends State<MyApp> {
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

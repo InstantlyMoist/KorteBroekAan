@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:kan_ik_een_korte_broek_aan/text/subtitletext.dart';
 import 'package:kan_ik_een_korte_broek_aan/text/titletext.dart';
 
@@ -14,15 +15,19 @@ class Header extends StatelessWidget {
           TitleText(text: "Kan ik een korte broek aan?"),
           SizedBox(height: 20),
           Row(
-            children: <Widget> [
+            children: <Widget>[
               SubtitleText(text: "Breda"),
               SizedBox(width: 15),
-              SubtitleText(text: "14C°")
+              SubtitleText(text: "14C°"),
+              SizedBox(width: 12),
+              GestureDetector(
+                child: Icon(Icons.refresh, size: 16, color: Color(0xFF717A82),),
+                onTap: () => { print('tap')},
+              ),
             ],
           )
         ],
       ),
     );
   }
-
 }

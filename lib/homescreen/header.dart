@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kan_ik_een_korte_broek_aan/text/subtitletext.dart';
 import 'package:kan_ik_een_korte_broek_aan/text/titletext.dart';
+import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
 
 class Header extends StatelessWidget {
   final String subtitleColor = "0xFF717A82";
@@ -16,9 +17,9 @@ class Header extends StatelessWidget {
           SizedBox(height: 20),
           Row(
             children: <Widget>[
-              SubtitleText(text: "Breda"),
+              SubtitleText(text: WeatherHandler.province),
               SizedBox(width: 15),
-              SubtitleText(text: "14C°"),
+              SubtitleText(text: WeatherHandler.temp.toString() + "C°"),
               SizedBox(width: 12),
               GestureDetector(
                 child: Icon(Icons.refresh, size: 16, color: Color(0xFF717A82),),

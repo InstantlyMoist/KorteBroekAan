@@ -23,12 +23,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   void load() async {
-    print('loading');
     await WeatherHandler.initializeData();
     setState(() {
       baseScreen = MainScreen();
     });
-    print('data loaded OK!');
   }
 
   @override

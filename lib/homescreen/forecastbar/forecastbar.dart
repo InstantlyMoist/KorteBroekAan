@@ -4,12 +4,12 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kan_ik_een_korte_broek_aan/homescreen/forecastbar/forecastitem.dart';
+import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
 
 // ignore: must_be_immutable
 class ForecastBar extends StatelessWidget {
   // Day names
-  Map<String, dynamic> data =
-      jsonDecode("{\"di\": false, \"wo\": true, \"do\": true,\"vr\": false}");
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,8 @@ class ForecastBar extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    for (String day in data.keys) ForecastItem(day, data[day]),
+                    for (ForecastItem item in WeatherHandler.forecastItems) item,
+                    //for (String day in data.keys) ForecastItem(day, data[day]),
                   ],
                 ),
               ),
@@ -52,7 +53,7 @@ class ForecastBar extends StatelessWidget {
                 IconButton(
                   onPressed: () => {
                   },
-                  padding: EdgeInsets.only(left: 10, right: 20),
+                  padding: EdgeInsets.only(left: 10, right: 15),
                   icon: Icon(
                     Icons.settings,
                     color: Colors.black.withOpacity(0.2),

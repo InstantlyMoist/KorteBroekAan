@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kan_ik_een_korte_broek_aan/homescreen/main_screen.dart';
-import 'package:kan_ik_een_korte_broek_aan/loadscreen/loading_screen.dart';
+import 'package:kan_ik_een_korte_broek_aan/error_screens/no_location_screen.dart';
+import 'package:kan_ik_een_korte_broek_aan/home_screen/main_screen.dart';
+import 'package:kan_ik_een_korte_broek_aan/load_screen/loading_screen.dart';
 import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
+import 'package:location/location.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +14,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   Widget baseScreen = LoadingScreen();
 
   @override
@@ -23,7 +24,34 @@ class _MyAppState extends State<MyApp> {
   }
 
   void load() async {
-    await WeatherHandler.initializeData();
+    Location location = new Location();
+
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+    LocationData _locationData;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        print("no permission, handle this");
+        setState(() {
+          baseScreen = NoLocationScreen();
+        });
+        return;
+      }
+    }
+
+    _locationData = await location.getLocation();
+    await WeatherHandler.initializeData(_locationData);
     setState(() {
       baseScreen = MainScreen();
     });

@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kan_ik_een_korte_broek_aan/homescreen/forecastbar/forecastitem.dart';
+import 'package:kan_ik_een_korte_broek_aan/home_screen/forecastbar/forecastitem.dart';
 import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
 
 // ignore: must_be_immutable

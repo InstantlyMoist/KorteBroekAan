@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kan_ik_een_korte_broek_aan/homescreen/header.dart';
+import 'package:kan_ik_een_korte_broek_aan/home_screen/header.dart';
 import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
 
 import 'forecastbar/forecastbar.dart';

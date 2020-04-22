@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:kan_ik_een_korte_broek_aan/homescreen/forecastbar/forecastitem.dart';
+import 'package:kan_ik_een_korte_broek_aan/home_screen/forecastbar/forecastitem.dart';
+import 'package:location/location.dart';
 
 class WeatherHandler {
 
@@ -9,11 +10,10 @@ class WeatherHandler {
   static String province;
   static double temp;
   static List<ForecastItem> forecastItems = new List();
-  //static Map<String, dynamic> forecast = ;
 
-  static Future<bool> initializeData() async {
+  static Future<bool> initializeData(LocationData locationData) async {
     String today = DateFormat('EEEE').format(DateTime.now()).substring(0, 3).toLowerCase();
-    var response = await http.get("http://kortebroekaan-server.herokuapp.com/api/weatherdata?lat=51.6062059&lon=4.7451539");
+    var response = await http.get("http://kortebroekaan-server.herokuapp.com/api/weatherdata?lat=${locationData.latitude}&lon=${locationData.longitude}");
     var decoded = await jsonDecode(response.body);
     temp = decoded["data"][today]["temp"];
     province = decoded["province"];

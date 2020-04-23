@@ -19,14 +19,12 @@ class _MainScreenState extends State<MainScreen> {
       body: SafeArea(
         child: Container(
           width: double.infinity,
-          margin: EdgeInsets.only(bottom: 45, top: 45, right: 50, left: 50),
+          margin: EdgeInsets.only(bottom: 45, top: 45, right: 40, left: 40),
           child: Container(
             child: Column(
               children: <Widget>[
                 Header(),
-                Spacer(),
-                WeatherImage(WeatherHandler.shortPantsToday),
-                Spacer(),
+                Expanded(child: WeatherImage(WeatherHandler.shortPantsToday)),
                 ForecastBar()
               ],
             ),

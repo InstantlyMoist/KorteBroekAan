@@ -13,22 +13,16 @@ class ForecastBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 64,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: new BorderRadius.circular(15),
-        boxShadow: [
-          new BoxShadow(
-            color: Color(0xFF000000).withOpacity(0.05),
-            offset: new Offset(0.0, 5.0),
-            blurRadius: 35,
-          )
-        ],
+    return Card(
+      elevation: 1,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(12),
+        ),
       ),
       child: Container(
         width: double.infinity,
+        height: 64,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[

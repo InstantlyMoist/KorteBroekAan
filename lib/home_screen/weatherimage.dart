@@ -8,7 +8,7 @@ class WeatherImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //margin: EdgeInsets.only(top: 30, bottom: 30, left: 30, right: 30),
+      margin: EdgeInsets.only(top: 30, bottom: 30, left: 30, right: 30),
       child: Image(
         image: AssetImage(shortPants
             ? 'assets/images/yes-man.png'

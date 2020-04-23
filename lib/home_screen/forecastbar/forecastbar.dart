@@ -4,12 +4,12 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kan_ik_een_korte_broek_aan/home_screen/forecastbar/forecastitem.dart';
+import 'package:kan_ik_een_korte_broek_aan/settings_screen/settingsscreen.dart';
 import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
 
 // ignore: must_be_immutable
 class ForecastBar extends StatelessWidget {
   // Day names
-
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,8 @@ class ForecastBar extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    for (ForecastItem item in WeatherHandler.forecastItems) item,
+                    for (ForecastItem item in WeatherHandler.forecastItems)
+                      item,
                     //for (String day in data.keys) ForecastItem(day, data[day]),
                   ],
                 ),
@@ -46,6 +47,10 @@ class ForecastBar extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SettingsScreen()),
+                    )
                   },
                   padding: EdgeInsets.only(left: 10, right: 15),
                   icon: Icon(

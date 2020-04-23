@@ -13,7 +13,10 @@ class Header extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          TitleText(text: "Kan ik een korte broek aan?"),
+          TitleText(
+            text: "Kan ik een korte broek aan?",
+            color: Color(0xFF2F4859),
+          ),
           SizedBox(height: 20),
           Row(
             children: <Widget>[
@@ -22,8 +25,12 @@ class Header extends StatelessWidget {
               SubtitleText(text: WeatherHandler.temp.toString() + "C°"),
               SizedBox(width: 12),
               GestureDetector(
-                child: Icon(Icons.refresh, size: 16, color: Color(0xFF717A82),),
-                onTap: () => { print('tap')},
+                child: Icon(
+                  Icons.refresh,
+                  size: 16,
+                  color: Color(0xFF717A82),
+                ),
+                onTap: () => {print('tap')},
               ),
             ],
           )

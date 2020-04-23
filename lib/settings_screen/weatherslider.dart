@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kan_ik_een_korte_broek_aan/text/smalltext.dart';
 import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
 
 class WeatherSlider extends StatefulWidget {
@@ -8,8 +9,25 @@ class WeatherSlider extends StatefulWidget {
 }
 
 class _WeatherSliderState extends State<WeatherSlider> {
-
   double sliderValue = 1;
+
+  void updateSlider(double newValue) {
+    setState(() {
+      this.sliderValue = newValue;
+    });
+  }
+
+  String getFilterName() {
+    int comparable = sliderValue.toInt();
+    if (comparable == 1)
+      return "Watje";
+    else if (comparable == 2)
+      return "Gemiddeld";
+    else if (comparable == 3)
+      return "Gedurfd";
+    else
+      return "Piet Paulusma";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,35 +36,40 @@ class _WeatherSliderState extends State<WeatherSlider> {
       child: Column(
         children: <Widget>[
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("ok"),
+              SmallText(
+                text: "Gevoeligheidsgraad",
+                color: WeatherHandler.getBackgroundColor(),
+              ),
+              Row(
+                children: <Widget>[
+                  SmallText(
+                      text: getFilterName(),
+                      color: WeatherHandler.getBackgroundColor()),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Icon(
+                    Icons.info_outline,
+                    size: 14,
+                    color: WeatherHandler.getBackgroundColor(),
+                  ),
+                ],
+              ),
             ],
           ),
           SliderTheme(
             data: SliderTheme.of(context).copyWith(
-              activeTrackColor: Color(WeatherHandler.shortPantsToday
-                  ? 0xFFFDEBD1
-                  : 0xFFBCCBD8)
-                  .withOpacity(0.2),
-              inactiveTrackColor: Color(WeatherHandler.shortPantsToday
-                  ? 0xFFFDEBD1
-                  : 0xFFBCCBD8)
-                  .withOpacity(0.2),
-              activeTickMarkColor: Color(WeatherHandler.shortPantsToday
-                  ? 0xFFFDEBD1
-                  : 0xFFBCCBD8),
-              inactiveTickMarkColor: Color(WeatherHandler.shortPantsToday
-                  ? 0xFFFDEBD1
-                  : 0xFFBCCBD8),
-              thumbColor: Color(WeatherHandler.shortPantsToday
-                  ? 0xFFFDEBD1
-                  : 0xFFBCCBD8),
+              activeTrackColor: WeatherHandler.getBackgroundColor().withOpacity(0.2),
+              inactiveTrackColor:
+                  WeatherHandler.getBackgroundColor().withOpacity(0.2),
+              activeTickMarkColor: WeatherHandler.getBackgroundColor(),
+              inactiveTickMarkColor: WeatherHandler.getBackgroundColor(),
+              thumbColor: WeatherHandler.getBackgroundColor(),
             ),
             child: Slider(
-                onChanged: (newState) => setState(() {
-                  sliderValue = newState;
-                  print(newState);
-                }),
+                onChanged: (newValue) => updateSlider(newValue),
                 value: sliderValue,
                 min: 1,
                 max: 4,

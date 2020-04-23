@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kan_ik_een_korte_broek_aan/settings_screen/weatherslider.dart';
+import 'package:kan_ik_een_korte_broek_aan/settings_screen/weathertoggle.dart';
 import 'package:kan_ik_een_korte_broek_aan/text/titletext.dart';
 import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
 
@@ -10,11 +11,13 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+
+  bool switchState = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          Color(WeatherHandler.shortPantsToday ? 0xFFC34F22 : 0xFF125B7F),
+      backgroundColor: WeatherHandler.getDarkColor(),
       body: SafeArea(
         child: Container(
           width: double.infinity,
@@ -25,10 +28,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               children: <Widget>[
                 TitleText(
                   text: "Instellingen",
-                  color: Color(
-                      WeatherHandler.shortPantsToday ? 0xFFFDEBD1 : 0xFFBCCBD8),
+                  color: WeatherHandler.getBackgroundColor(),
                 ),
                 WeatherSlider(),
+                WeatherToggle(text: "Eenheid",
+                firstOption: "°C",
+                secondOption: "°F",),
+                WeatherToggle(text: "Dagelijkse Notificaties",
+                  firstOption: "Aan",
+                  secondOption: "Uit",),
               ],
             ),
           ),

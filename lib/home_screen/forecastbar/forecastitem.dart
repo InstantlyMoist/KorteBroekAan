@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,8 +11,9 @@ class ForecastItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 12, right: 12),
+    return Container(
+      height: double.infinity,
+      padding: EdgeInsets.only(left: 12, right: 12, top: 10, bottom: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -21,13 +23,16 @@ class ForecastItem extends StatelessWidget {
             size: 20.0,
           ),
           SizedBox(height: 5),
-          Text(
+          AutoSizeText(
             day.toUpperCase(),
+            minFontSize: 4,
+            maxFontSize: 11,
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Color(0xFFCCCCCC)
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFCCCCCC)
             ),
-          )
+          ),
         ],
       ),
     );

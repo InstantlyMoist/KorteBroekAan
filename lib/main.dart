@@ -44,7 +44,12 @@ class _MyAppState extends State<MyApp> {
       if (_permissionGranted != PermissionStatus.granted) {
         print("no permission, handle this");
         setState(() {
-          baseScreen = NoLocationScreen();
+          baseScreen = NoLocationScreen(onLocationAllow: ()  {
+            setState(() {
+              baseScreen = LoadingScreen();
+            });
+            load();
+          });
         });
         return;
       }

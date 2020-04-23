@@ -12,7 +12,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +19,8 @@ class _MainScreenState extends State<MainScreen> {
       body: SafeArea(
         child: Container(
           width: double.infinity,
-          height: MediaQuery.of(context).size.height - 150,
           margin: EdgeInsets.only(bottom: 45, top: 45, right: 50, left: 50),
-          child: Center(
+          child: Container(
             child: Column(
               children: <Widget>[
                 Header(),

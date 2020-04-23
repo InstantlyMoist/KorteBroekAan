@@ -6,18 +6,28 @@ import 'package:permission_handler/permission_handler.dart';
 class NoLocationScreen extends StatefulWidget {
   @override
   _NoLocationScreenState createState() => _NoLocationScreenState();
+
+  VoidCallback onLocationAllow;
+
+  NoLocationScreen({this.onLocationAllow});
 }
 
 class _NoLocationScreenState extends State<NoLocationScreen>
     with WidgetsBindingObserver {
-  VoidCallback onSettingsLeave;
 
-  AppLifecycleState _currentState;
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    print('changing state');
-    _currentState = state;
+  bool _granted = false;
+
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    print(state.toString());
+    if (state == AppLifecycleState.resumed) {
+      bool granted = await Permission.location.isGranted;
+      if (granted != _granted) {
+        setState(() {
+          widget.onLocationAllow();
+        });
+      }
+    }
   }
 
   @override
@@ -34,15 +44,6 @@ class _NoLocationScreenState extends State<NoLocationScreen>
   void handlePermission() async {
     print("hello world");
     bool isOpened = await openAppSettings();
-    await compute(notifyOnFocus, true);
-    print("Done, refocussing");
-  }
-
-  Future notifyOnFocus(bool test) async {
-    while (_currentState != AppLifecycleState.resumed) {
-
-    }
-    return null;
   }
 
   @override

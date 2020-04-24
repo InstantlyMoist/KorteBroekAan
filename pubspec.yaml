@@ -27,6 +27,7 @@ dependencies:
   location: ^3.0.0
   permission_handler: 5.0.0+hotfix.3
   auto_size_text: 2.1.0
+  shared_preferences: 0.5.7
 
 dev_dependencies:
   flutter_test:

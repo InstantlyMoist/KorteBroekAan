@@ -3,15 +3,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:kan_ik_een_korte_broek_aan/home_screen/forecastbar/forecastitem.dart';
+import 'package:kan_ik_een_korte_broek_aan/preferences_handler.dart';
 import 'package:location/location.dart';
 
 class WeatherHandler {
   static bool shortPantsToday = false;
   static String province;
   static double temp;
-  static List<ForecastItem> forecastItems = new List();
+  static List<ForecastItem> forecastItems;
 
   static Future<bool> initializeData(LocationData locationData) async {
+    forecastItems = new List();
     String today =
         DateFormat('EEEE').format(DateTime.now()).substring(0, 3).toLowerCase();
     var response = await http.get(
@@ -33,7 +35,11 @@ class WeatherHandler {
   }
 
   static bool meetsConditions(double temp, bool rain) {
-    return !rain && temp > 10;
+    double filterStrength = PreferencesHandler.filterStrength;
+    if (filterStrength == 1) return false;
+    else if (filterStrength == 2) return !rain && temp > 15;
+    else if (filterStrength == 3) return !rain && temp > 10;
+    else return true;
   }
 
   static Color getBackgroundColor() {

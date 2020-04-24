@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kan_ik_een_korte_broek_aan/preferences_handler.dart';
 import 'package:kan_ik_een_korte_broek_aan/text/smalltext.dart';
 import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
 
@@ -8,15 +9,22 @@ class WeatherToggle extends StatefulWidget {
   _WeatherToggleState createState() => _WeatherToggleState();
 
   String text;
+  String preferencesToggle;
   String firstOption;
   String secondOption;
 
-  WeatherToggle({this.text, this.firstOption, this.secondOption});
+  WeatherToggle({this.text, this.preferencesToggle, this.firstOption, this.secondOption});
 }
 
 class _WeatherToggleState extends State<WeatherToggle> {
 
-  bool state = true;
+  bool state;
+
+  @override
+  void initState() {
+    super.initState();
+    state = PreferencesHandler.getBoolField(widget.preferencesToggle);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +42,7 @@ class _WeatherToggleState extends State<WeatherToggle> {
           ),
           GestureDetector(
             onTap: () => setState(() {
+              PreferencesHandler.setBoolField(widget.preferencesToggle, !state);
               state = !state;
             }),
             child: Container(

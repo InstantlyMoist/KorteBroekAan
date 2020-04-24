@@ -1,11 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kan_ik_een_korte_broek_aan/preferences_handler.dart';
 import 'package:kan_ik_een_korte_broek_aan/text/subtitletext.dart';
 import 'package:kan_ik_een_korte_broek_aan/text/titletext.dart';
 import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
 
-class Header extends StatelessWidget {
+class Header extends StatefulWidget {
+  @override
+  _HeaderState createState() => _HeaderState();
+
+  VoidCallback forceReload;
+
+  Header({this.forceReload});
+
+}
+
+class _HeaderState extends State<Header> {
   final String subtitleColor = "0xFF717A82";
+
+  String tempString;
+
+  @override
+  void initState() {
+    super.initState();
+    double temp = WeatherHandler.temp;
+    bool celcius = PreferencesHandler.getBoolField("celcius");
+    if (celcius) tempString = "${temp.toStringAsFixed(1)}C°";
+    else tempString = "${(temp * 1.8 + 32).toStringAsFixed(1)}F°";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +44,7 @@ class Header extends StatelessWidget {
             children: <Widget>[
               SubtitleText(text: WeatherHandler.province),
               SizedBox(width: 15),
-              SubtitleText(text: WeatherHandler.temp.toString() + "C°"),
+              SubtitleText(text: tempString),
               SizedBox(width: 12),
               GestureDetector(
                 child: Icon(
@@ -30,7 +52,7 @@ class Header extends StatelessWidget {
                   size: 16,
                   color: Color(0xFF717A82),
                 ),
-                onTap: () => {print('tap')},
+                onTap: () => widget.forceReload(),
               ),
             ],
           )

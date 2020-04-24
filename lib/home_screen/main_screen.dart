@@ -9,9 +9,18 @@ import 'weatherimage.dart';
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
+
+  VoidCallback forceReload;
+
+  MainScreen({this.forceReload});
+
+
 }
 
 class _MainScreenState extends State<MainScreen> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,9 +32,9 @@ class _MainScreenState extends State<MainScreen> {
           child: Container(
             child: Column(
               children: <Widget>[
-                Header(),
+                Header(forceReload: () => widget.forceReload(),),
                 Expanded(child: WeatherImage(WeatherHandler.shortPantsToday)),
-                ForecastBar()
+                ForecastBar(forceReload: () => widget.forceReload(),)
               ],
             ),
           ),

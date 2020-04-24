@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kan_ik_een_korte_broek_aan/preferences_handler.dart';
 import 'package:kan_ik_een_korte_broek_aan/text/smalltext.dart';
 import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
 
@@ -11,8 +12,15 @@ class WeatherSlider extends StatefulWidget {
 class _WeatherSliderState extends State<WeatherSlider> {
   double sliderValue = 1;
 
+  @override
+  void initState() {
+    super.initState();
+    sliderValue = PreferencesHandler.filterStrength;
+  }
+
   void updateSlider(double newValue) {
     setState(() {
+      PreferencesHandler.setFilterStrength(newValue);
       this.sliderValue = newValue;
     });
   }

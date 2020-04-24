@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:kan_ik_een_korte_broek_aan/error_screens/no_location_screen.dart';
 import 'package:kan_ik_een_korte_broek_aan/home_screen/main_screen.dart';
 import 'package:kan_ik_een_korte_broek_aan/load_screen/loading_screen.dart';
+import 'package:kan_ik_een_korte_broek_aan/preferences_handler.dart';
 import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
 import 'package:location/location.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Widget baseScreen = LoadingScreen();
+  Widget baseScreen = Container();
 
   @override
   void initState() {
@@ -24,6 +25,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   void load() async {
+    setState(() {
+      baseScreen = LoadingScreen();
+    });
+
     Location location = new Location();
 
     bool _serviceEnabled;
@@ -56,9 +61,10 @@ class _MyAppState extends State<MyApp> {
     }
 
     _locationData = await location.getLocation();
+    await PreferencesHandler.load();
     await WeatherHandler.initializeData(_locationData);
     setState(() {
-      baseScreen = MainScreen();
+      baseScreen = MainScreen(forceReload: () => load(),);
     });
   }
 

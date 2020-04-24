@@ -9,7 +9,11 @@ import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
 
 // ignore: must_be_immutable
 class ForecastBar extends StatelessWidget {
-  // Day names
+
+  VoidCallback forceReload;
+
+
+  ForecastBar({this.forceReload});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +53,7 @@ class ForecastBar extends StatelessWidget {
                   onPressed: () => {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SettingsScreen()),
+                      MaterialPageRoute(builder: (context) => SettingsScreen(forceReload: () => forceReload(),)),
                     )
                   },
                   padding: EdgeInsets.only(left: 10, right: 15),

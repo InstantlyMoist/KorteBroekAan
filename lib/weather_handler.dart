@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:kan_ik_een_korte_broek_aan/home_screen/forecastbar/forecastitem.dart';
@@ -27,7 +28,7 @@ class WeatherHandler {
       if (day != today) {
         forecastItems.add(new ForecastItem(
             day,
-            meetsConditions(decoded["data"][day]["temp"],
+            meetsConditions(decoded["data"][day]["temp"].toDouble(),
                 decoded["data"][day]["chanceOfRain"])));
       }
     }

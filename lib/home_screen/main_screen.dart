@@ -24,7 +24,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(WeatherHandler.shortPantsToday ? 0xFFFDEBD1 : 0xFFBCCBD8),
+      backgroundColor: WeatherHandler.getBackgroundColor(),
       body: SafeArea(
         child: Container(
           width: double.infinity,

@@ -43,6 +43,7 @@ flutter:
   assets:
     - assets/images/yes-man.png
     - assets/images/no-man.png
+    - assets/images/no-man-plain.png
   fonts:
     - family: CircularStd
       fonts:

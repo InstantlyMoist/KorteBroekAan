@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kan_ik_een_korte_broek_aan/popups/base_popup.dart';
+import 'package:kan_ik_een_korte_broek_aan/popups/filter_popup.dart';
 import 'package:kan_ik_een_korte_broek_aan/preferences_handler.dart';
 import 'package:kan_ik_een_korte_broek_aan/text/smalltext.dart';
 import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
@@ -58,10 +60,16 @@ class _WeatherSliderState extends State<WeatherSlider> {
                   SizedBox(
                     width: 10,
                   ),
-                  Icon(
-                    Icons.info_outline,
-                    size: 14,
-                    color: WeatherHandler.getBackgroundColor(),
+                  GestureDetector(
+                    onTap: () => showDialog(
+                      context: context,
+                      child: FilterPopup(),
+                    ),
+                    child: Icon(
+                      Icons.info_outline,
+                      size: 14,
+                      color: WeatherHandler.getBackgroundColor(),
+                    ),
                   ),
                 ],
               ),
@@ -69,7 +77,8 @@ class _WeatherSliderState extends State<WeatherSlider> {
           ),
           SliderTheme(
             data: SliderTheme.of(context).copyWith(
-              activeTrackColor: WeatherHandler.getBackgroundColor().withOpacity(0.2),
+              activeTrackColor:
+                  WeatherHandler.getBackgroundColor().withOpacity(0.2),
               inactiveTrackColor:
                   WeatherHandler.getBackgroundColor().withOpacity(0.2),
               activeTickMarkColor: WeatherHandler.getBackgroundColor(),

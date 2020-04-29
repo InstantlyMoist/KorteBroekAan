@@ -13,7 +13,6 @@ class SettingsScreen extends StatefulWidget {
 
   SettingsScreen({this.forceReload});
 
-
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {

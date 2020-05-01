@@ -1,3 +1,4 @@
+import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesHandler {
@@ -24,11 +25,13 @@ class PreferencesHandler {
   }
 
   static void setFilterStrength(double newStrength) {
+    WeatherHandler.settingsHandled = false;
     preferences.setDouble("filterStrength", newStrength);
     fetchData();
   }
 
   static void setBoolField(String name, bool value) {
+    WeatherHandler.settingsHandled = false;
     preferences.setBool(name, value);
     fetchData();
   }

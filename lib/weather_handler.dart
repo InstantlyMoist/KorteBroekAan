@@ -8,6 +8,9 @@ import 'package:kan_ik_een_korte_broek_aan/preferences_handler.dart';
 import 'package:location/location.dart';
 
 class WeatherHandler {
+
+  static bool settingsHandled = true;
+
   static bool shortPantsToday = false;
   static String province;
   static double temp;

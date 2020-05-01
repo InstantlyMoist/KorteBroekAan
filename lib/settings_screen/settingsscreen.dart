@@ -18,6 +18,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
 
   Future<bool> _willPopCallback() async {
+    if (WeatherHandler.settingsHandled) return true;
     widget.forceReload();
     return true;
   }

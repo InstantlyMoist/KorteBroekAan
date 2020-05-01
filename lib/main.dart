@@ -3,11 +3,19 @@ import 'package:flutter/services.dart';
 import 'package:kan_ik_een_korte_broek_aan/error_screens/no_location_screen.dart';
 import 'package:kan_ik_een_korte_broek_aan/home_screen/main_screen.dart';
 import 'package:kan_ik_een_korte_broek_aan/load_screen/loading_screen.dart';
+import 'package:kan_ik_een_korte_broek_aan/popups/base_popup.dart';
+import 'package:kan_ik_een_korte_broek_aan/popups/location_popup.dart';
 import 'package:kan_ik_een_korte_broek_aan/preferences_handler.dart';
 import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
 import 'package:location/location.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(MaterialApp(
+      home: MyApp(),
+      title: 'Kan ik een korte broek aan',
+      theme: ThemeData(
+        fontFamily: 'CircularStd',
+      ),
+    ));
 
 class MyApp extends StatefulWidget {
   @override
@@ -25,6 +33,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void load() async {
+    WeatherHandler.settingsHandled = true;
     setState(() {
       baseScreen = LoadingScreen();
     });
@@ -48,14 +57,14 @@ class _MyAppState extends State<MyApp> {
       _permissionGranted = await location.requestPermission();
       if (_permissionGranted != PermissionStatus.granted) {
         print("no permission, handle this");
-        setState(() {
-          baseScreen = NoLocationScreen(onLocationAllow: ()  {
-            setState(() {
-              baseScreen = LoadingScreen();
-            });
-            load();
-          });
-        });
+        showDialog(
+            context: context,
+            child: LocationPopup(
+              onLocationAllow: () {
+                Navigator.of(context).pop();
+                load();
+              },
+            ));
         return;
       }
     }
@@ -64,17 +73,14 @@ class _MyAppState extends State<MyApp> {
     await PreferencesHandler.load();
     await WeatherHandler.initializeData(_locationData);
     setState(() {
-      baseScreen = MainScreen(forceReload: () => load(),);
+      baseScreen = MainScreen(
+        forceReload: () => load(),
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Kan ik een korte broek aan',
-        theme: ThemeData(
-          fontFamily: 'CircularStd',
-        ),
-        home: baseScreen);
+    return Scaffold(body: baseScreen);
   }
 }

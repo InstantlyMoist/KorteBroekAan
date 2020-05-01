@@ -13,12 +13,14 @@ class BasePopup extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
-      ), //this right here
+      ),
       child: Container(
         margin: EdgeInsets.all(5),
-        height: 300,
+        //height: 300,
+        width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
@@ -34,7 +36,7 @@ class BasePopup extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "Informatie over filters",
+                      headerTitle,
                       style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
                     Spacer(),
@@ -49,10 +51,12 @@ class BasePopup extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              width: double.infinity,
-              margin: EdgeInsets.only(top: 15, left: 10, right: 10),
-              child: this.child,
+            Expanded(
+              flex: 0,
+              child: Container(
+                margin: EdgeInsets.only(top: 15, left: 10, right: 10, bottom: 10),
+                child: this.child,
+              ),
             ),
           ],
         ),

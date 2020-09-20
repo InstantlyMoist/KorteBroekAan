@@ -22,6 +22,9 @@
                  until Flutter renders its first frame. It can be removed if
                  defined in @style/LaunchTheme). -->
             <meta-data
+                android:name="firebase_analytics_collection_deactivated"
+                android:value="true" />
+            <meta-data
                 android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
                 android:value="true" />
             <intent-filter>

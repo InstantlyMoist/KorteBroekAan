@@ -1,18 +1,16 @@
 import 'package:flutter/cupertino.dart';
+import 'package:kan_ik_een_korte_broek_aan/data/weather_service.dart';
 
 class WeatherImage extends StatelessWidget {
-  bool shortPants = true;
-
-  WeatherImage(this.shortPants);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 30, bottom: 30, left: 30, right: 30),
       child: Image(
-        image: AssetImage(shortPants
-            ? 'assets/images/yes-man.png'
-            : 'assets/images/no-man.png'),
+        image: AssetImage(WeatherService.getDay(0)
+            ? "assets/images/yes-man.png"
+            : "assets/images/no-man.png"),
       ),
     );
   }

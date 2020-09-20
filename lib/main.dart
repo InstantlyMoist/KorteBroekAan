@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kan_ik_een_korte_broek_aan/error_screens/no_location_screen.dart';
-import 'package:kan_ik_een_korte_broek_aan/home_screen/main_screen.dart';
-import 'package:kan_ik_een_korte_broek_aan/load_screen/loading_screen.dart';
-import 'package:kan_ik_een_korte_broek_aan/popups/base_popup.dart';
-import 'package:kan_ik_een_korte_broek_aan/popups/location_popup.dart';
-import 'package:kan_ik_een_korte_broek_aan/preferences_handler.dart';
-import 'package:kan_ik_een_korte_broek_aan/weather_handler.dart';
+import 'package:kan_ik_een_korte_broek_aan/data/app_color.dart';
+import 'package:kan_ik_een_korte_broek_aan/data/preferences_service.dart';
+import 'package:kan_ik_een_korte_broek_aan/data/weather_service.dart';
+import 'package:kan_ik_een_korte_broek_aan/handlers/location_handler.dart';
+import 'package:kan_ik_een_korte_broek_aan/screens/home_screen/home_screen_state.dart';
+import 'package:kan_ik_een_korte_broek_aan/widgets/text/loading_screen_title_text.dart';
 import 'package:location/location.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 void main() => runApp(MaterialApp(
       home: MyApp(),
@@ -22,65 +22,92 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
-  Widget baseScreen = Container();
+class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
+  //TODO Make all colors static
+
+  bool dataReady = false;
+  bool meetsRequirements;
+  Color currentColor = AppColor.ORANGELIGHT.color;
+
+  void init() async {
+    //TODO: Init location service
+    LocationData currentLocation = await LocationHandler.getLocation();
+    int woeID = await WeatherService.loadWOEID(currentLocation);
+    await PreferencesService.init(woeID);
+    bool meetsRequirements = await WeatherService.loadWeatherData(woeID);
+    this.meetsRequirements = meetsRequirements;
+    dataReady = true;
+  }
 
   @override
   void initState() {
     super.initState();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    load();
+    init();
   }
 
-  void load() async {
-    WeatherHandler.settingsHandled = true;
-    setState(() {
-      baseScreen = LoadingScreen();
-    });
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+      Future.delayed(Duration(seconds: 1), () {
+        setState(() {
+          currentColor = AppColor.BLUELIGHT.color;
+        });
+      });
 
-    Location location = new Location();
-
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
-    LocationData _locationData;
-
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return;
-      }
-    }
-
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        print("no permission, handle this");
-        showDialog(
-            context: context,
-            child: LocationPopup(
-              onLocationAllow: () {
-                Navigator.of(context).pop();
-                load();
-              },
-            ));
-        return;
-      }
-    }
-
-    _locationData = await location.getLocation();
-    await PreferencesHandler.load();
-    await WeatherHandler.initializeData(_locationData);
-    setState(() {
-      baseScreen = MainScreen(
-        forceReload: () => load(),
-      );
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: baseScreen);
+    return Scaffold(
+      body: GestureDetector(
+        child: AnimatedContainer(
+          duration: Duration(seconds: 1),
+          onEnd: () {
+            if (dataReady) {
+              if (currentColor == (meetsRequirements ? AppColor.ORANGELIGHT.color : AppColor.BLUELIGHT.color)) {
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) {
+                      return HomeScreenState();
+                    },
+                  ),
+                );
+                return;
+              }
+            }
+            setState(() {
+              currentColor = currentColor == AppColor.ORANGELIGHT.color
+                  ? AppColor.BLUELIGHT.color
+                  : AppColor.ORANGELIGHT.color;
+            });
+          },
+          color: currentColor,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                LoadingScreenTitleText("Kan je vandaag een korte broek aan?"),
+                SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("We vragen het even aan Piet Paulusma"),
+                    SizedBox(
+                      width: 2,
+                    ),
+                    JumpingDotsProgressIndicator()
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

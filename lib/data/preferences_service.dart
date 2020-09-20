@@ -13,7 +13,7 @@ class PreferencesService {
     _sharedPreferences = await SharedPreferences.getInstance();
 
     _filterStrength = _sharedPreferences.getDouble("filter_strength") ?? 1;
-    _lastWOEID = _sharedPreferences.getDouble("last_WOEID") ?? woeID.toDouble(); // Default to amsterdam... Can be loaded later on.
+    _lastWOEID = _sharedPreferences.getDouble("last_WOEID") ?? woeID.toDouble();
     if (_lastWOEID != woeID) {
       _lastWOEID = woeID.toDouble();
       // TODO: Change notification service to firebase (Which means unsubscribing to old topic and subscribing to new topic)

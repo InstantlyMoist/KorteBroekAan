@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kan_ik_een_korte_broek_aan/components/faded_route_builder.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/weather_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/main.dart';
 import 'package:kan_ik_een_korte_broek_aan/screens/home_screen/components/forecase_bar/forecast_item.dart';
@@ -58,15 +59,7 @@ class _ForecastBarState extends State<ForecastBar> {
                       padding: EdgeInsets.zero,
                       constraints: BoxConstraints(),
                       onPressed: () {
-                        Navigator.of(context).pop();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) {
-                              return SettingsScreenState();
-                            },
-                          ),
-                        );
+                        Navigator.of(context).pushAndRemoveUntil(FadedRouteBuilder(page: SettingsScreenState()), (Route<dynamic> route)  => false);
                       },
                       icon: Icon(Icons.settings),
                     ),

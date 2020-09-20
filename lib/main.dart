@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kan_ik_een_korte_broek_aan/components/faded_route_builder.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/app_color.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/preferences_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/weather_service.dart';
@@ -23,14 +24,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
-  //TODO Make all colors static
-
   bool dataReady = false;
   bool meetsRequirements;
   Color currentColor = AppColor.ORANGELIGHT.color;
 
   void init() async {
-    //TODO: Init location service
     LocationData currentLocation = await LocationHandler.getLocation();
     int woeID = await WeatherService.loadWOEID(currentLocation);
     await PreferencesService.init(woeID);
@@ -43,18 +41,17 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    init();
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-      Future.delayed(Duration(seconds: 1), () {
-        setState(() {
-          currentColor = AppColor.BLUELIGHT.color;
-        });
+    init();
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        currentColor = AppColor.BLUELIGHT.color;
       });
-
+    });
   }
 
   @override
@@ -63,18 +60,15 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
       body: GestureDetector(
         child: AnimatedContainer(
           duration: Duration(seconds: 1),
-          onEnd: () {
+          onEnd: () async {
             if (dataReady) {
-              if (currentColor == (meetsRequirements ? AppColor.ORANGELIGHT.color : AppColor.BLUELIGHT.color)) {
-                Navigator.of(context).pop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) {
-                      return HomeScreenState();
-                    },
-                  ),
-                );
+              if (currentColor ==
+                  (meetsRequirements
+                      ? AppColor.ORANGELIGHT.color
+                      : AppColor.BLUELIGHT.color)) {
+                Navigator.of(context).pushAndRemoveUntil(
+                    FadedRouteBuilder(page: HomeScreenState()),
+                    (Route<dynamic> route) => false);
                 return;
               }
             }

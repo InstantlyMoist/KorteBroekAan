@@ -10,6 +10,7 @@ class LoadingScreenTitleText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       _text,
+      textAlign: TextAlign.center,
       style: TextStyle(fontSize: 24),
     );
   }

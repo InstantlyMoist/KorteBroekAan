@@ -1,0 +1,113 @@
+{
+	"@@last_modified": "2020-09-23T16:25:24.112278",
+	"comingSoon": "Coming soon...",
+	"@comingSoon": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"filter1": "Pussy",
+	"@filter1": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"filter2": "Average",
+	"@filter2": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"filter3": "Bold",
+	"@filter3": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"filter4": "Chuck Norris",
+	"@filter4": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"friday": "fri",
+	"@friday": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"homeTitle": "Can I wear shorts?",
+	"@homeTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"loadingSubtitle": "We are currently asking Chuck Norris",
+	"@loadingSubtitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"monday": "mon",
+	"@monday": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"notifications": "Daily Notifications",
+	"@notifications": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"saturday": "sat",
+	"@saturday": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"sensitivity": "Sensitivity",
+	"@sensitivity": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"settings": "Settings",
+	"@settings": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"sunday": "sun",
+	"@sunday": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"thursday": "thu",
+	"@thursday": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"tuesday": "tue",
+	"@tuesday": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"unit": "Unit",
+	"@unit": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"wednesday": "wed",
+	"@wednesday": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"loadingTitle": "Can you wear shorts today?",
+	"@loadingTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"noLocationTitle": "We need your location!",
+	"@noLocationTitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"noLocationSubtitle": "Without a location we cannot provide a weather forecast ...",
+	"@noLocationSubtitle": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"noLocationButtonText": "Click here to go to your settings",
+	"@noLocationButtonText": {
+		"type": "text",
+		"placeholders": {}
+	}
+}

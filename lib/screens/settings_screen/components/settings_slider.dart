@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/app_color.dart';
+import 'package:kan_ik_een_korte_broek_aan/data/localization_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/preferences_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/weather_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/widgets/text/subtitle_text.dart';
@@ -16,10 +17,10 @@ class _SettingsSliderState extends State<SettingsSlider> {
   double _value = 1;
 
   String getFilterName() {
-    if (_value == 1) return "Watje";
-    if (_value == 2) return "Gemiddeld";
-    if (_value == 3) return "Gedurfd";
-    else return "Piet Paulusma";
+    if (_value == 1) return LocalizationService.of(context).filter1;
+    if (_value == 2) return LocalizationService.of(context).filter2;
+    if (_value == 3) return LocalizationService.of(context).filter3;
+    else return LocalizationService.of(context).filter4;
   }
 
   @override
@@ -37,7 +38,7 @@ class _SettingsSliderState extends State<SettingsSlider> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Subtitletext(text: "Gevoeligheidsgraad", color: WeatherService.getDay(0) ? AppColor.ORANGELIGHT.color : AppColor.BLUELIGHT.color,),
+              Subtitletext(text: LocalizationService.of(context).sensitivity, color: WeatherService.getDay(0) ? AppColor.ORANGELIGHT.color : AppColor.BLUELIGHT.color,),
               Subtitletext(text: getFilterName(), color: WeatherService.getDay(0) ? AppColor.ORANGELIGHT.color : AppColor.BLUELIGHT.color,),
             ],
           ),
@@ -57,10 +58,8 @@ class _SettingsSliderState extends State<SettingsSlider> {
               divisions: 3,
               onChanged: (value) {
                 setState(() {
-                  print(value);
                   _value = value;
                   PreferencesService.filterStrength = _value;
-                  PreferencesService.save();
                 });
               },
             ),

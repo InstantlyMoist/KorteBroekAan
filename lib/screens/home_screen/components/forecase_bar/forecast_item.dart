@@ -23,7 +23,10 @@ class ForecastItem extends StatelessWidget {
           SizedBox(
             height: 5,
           ),
-          Subtitletext(text: _weekDay)
+          Subtitletext(
+            text: _weekDay,
+            color: AppColor.BLUELIGHTERTHANDARK.color,
+          )
         ],
       ),
     );

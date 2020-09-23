@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:collection';
+import 'package:flutter/cupertino.dart';
+import 'package:kan_ik_een_korte_broek_aan/data/localization_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/preferences_service.dart';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
@@ -12,12 +14,17 @@ class WeatherService {
       "https://www.metaweather.com/api/location/";
 
   static var _cachedResponse;
-  static double currentTemp;
+  static double _currentTemp;
   static LinkedList list;
+
+  static double getCurrentTemp() {
+    return PreferencesService.celcius ? _currentTemp : (_currentTemp * 1.8) + 32;
+  }
 
   static loadWOEID(LocationData data) async {
     final String FIND_WOEID_URL =
         '${FIND_WOEID_BASE_URL}${data.latitude},${data.longitude}';
+    print(FIND_WOEID_URL);
     var response = await http.get(FIND_WOEID_URL);
     var decodedResponse = jsonDecode(response.body);
     return decodedResponse[0]['woeid'];
@@ -34,7 +41,7 @@ class WeatherService {
 
   static Future<void> handleResponse() async {
     list = new LinkedList<WeatherEntry>();
-    currentTemp = _cachedResponse['consolidated_weather'][0]['the_temp'];
+    _currentTemp = _cachedResponse['consolidated_weather'][0]['the_temp'];
     for (var day in _cachedResponse['consolidated_weather']) {
       list.add(WeatherEntry(meetsRequirements(day['the_temp'], isRain('weather_state_abbr'))));
     }
@@ -66,16 +73,16 @@ class WeatherService {
     return weekDay > 7 ? weekDay - 7 : weekDay;
   }
 
-  static String getWeekdayString(int weekDay) {
+  static String getWeekdayString(int weekDay, BuildContext context) {
     weekDay = getWeekDay(weekDay);
     switch (weekDay) {
-      case 1: return "ma";
-      case 2: return "di";
-      case 3: return "wo";
-      case 4: return "do";
-      case 5: return "vr";
-      case 6: return "za";
-      case 7: return "zo";
+      case 1: return LocalizationService.of(context).monday;
+      case 2: return LocalizationService.of(context).tuesday;
+      case 3: return LocalizationService.of(context).wednesday;
+      case 4: return LocalizationService.of(context).thursday;
+      case 5: return LocalizationService.of(context).friday;
+      case 6: return LocalizationService.of(context).saturday;
+      case 7: return LocalizationService.of(context).sunday;
     }
   }
 }

@@ -12,7 +12,7 @@ class PreferencesService {
   static Future<void> init(int woeID) async {
     _sharedPreferences = await SharedPreferences.getInstance();
 
-    _filterStrength = _sharedPreferences.getDouble("filter_strength") ?? 1;
+    _filterStrength = _sharedPreferences.getDouble("filter_strength") ?? 2;
     _lastWOEID = _sharedPreferences.getDouble("last_WOEID") ?? woeID.toDouble();
     if (_lastWOEID != woeID) {
       _lastWOEID = woeID.toDouble();
@@ -29,6 +29,16 @@ class PreferencesService {
     _sharedPreferences.setDouble("last_WOEID", _lastWOEID);
     _sharedPreferences.setBool("celcius", _celcius);
     _sharedPreferences.setBool("notifications", _notifications);
+  }
+
+  static bool getByName(String name) {
+    if (name == 'notifications') return _notifications;
+    else return celcius;
+  }
+
+  static void toggleByName(String name) {
+    if (name == 'notifications') notifications = !notifications;
+    else celcius = !celcius;
   }
 
   static bool get notifications => _notifications;

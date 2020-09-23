@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kan_ik_een_korte_broek_aan/components/faded_route_builder.dart';
+import 'package:kan_ik_een_korte_broek_aan/data/app_color.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/weather_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/main.dart';
 import 'package:kan_ik_een_korte_broek_aan/screens/home_screen/components/forecase_bar/forecast_item.dart';
@@ -17,6 +18,11 @@ class _ForecastBarState extends State<ForecastBar> {
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     _forecastItems = new List();
     DateTime today = DateTime.now();
     for (int i = 1; i != WeatherService.list.length; i++) {
@@ -24,7 +30,7 @@ class _ForecastBarState extends State<ForecastBar> {
       _forecastItems.add(
         ForecastItem(
           WeatherService.getDay(i),
-          WeatherService.getWeekdayString(weekDay),
+          WeatherService.getWeekdayString(weekDay, context),
         ),
       );
     }
@@ -59,9 +65,14 @@ class _ForecastBarState extends State<ForecastBar> {
                       padding: EdgeInsets.zero,
                       constraints: BoxConstraints(),
                       onPressed: () {
-                        Navigator.of(context).pushAndRemoveUntil(FadedRouteBuilder(page: SettingsScreenState()), (Route<dynamic> route)  => false);
+                        Navigator.of(context).pushAndRemoveUntil(
+                            FadedRouteBuilder(page: SettingsScreenState()),
+                            (Route<dynamic> route) => false);
                       },
-                      icon: Icon(Icons.settings),
+                      icon: Icon(
+                        Icons.settings,
+                        color: AppColor.BLUELIGHTERTHANDARK.color,
+                      ),
                     ),
                   ),
                 ],

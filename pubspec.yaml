@@ -11,7 +11,7 @@ description: Kan ik een korte broek aan?
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.1+2
+version: 1.0.2+3
 
 environment:
   sdk: '>=2.6.0 <3.0.0'
@@ -19,16 +19,21 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   firebase_core: ^0.4.0+9
   firebase_analytics: ^5.0.2
   cupertino_icons: ^0.1.2
   http: 0.12.0+4
-  intl: ^0.16.0
   location: ^3.0.2
   permission_handler: 5.0.0+hotfix.3
   shared_preferences: 0.5.7
   flutter_launcher_icons: 0.7.5
   progress_indicators: 0.1.5
+  admob_flutter: 0.3.4
+  flutter_cupertino_localizations: ^1.0.1
+  intl: 0.16.1
+  intl_translation: 0.17.10+1
 
 flutter_icons:
   image_path: assets/images/yes-man-plain.png
@@ -36,8 +41,6 @@ flutter_icons:
   ios: true
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
 
 
 # For information on the generic Dart part of this file, see the
@@ -56,3 +59,5 @@ flutter:
         - asset: fonts/CircularStd-Bold.ttf
           weight: 700
         - asset: fonts/CircularStd-Medium.ttf
+flutter_intl:
+  enabled: true

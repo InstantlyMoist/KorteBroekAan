@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "432381053299",
+    "firebase_url": "https://kortebroekaan.firebaseio.com",
+    "project_id": "kortebroekaan",
+    "storage_bucket": "kortebroekaan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432381053299:android:62c2feccbf22760a321d06",
+        "android_client_info": {
+          "package_name": "moldovo.kan_ik_een_korte_broek_aan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432381053299-t5laa7q3tpared076ho21q23m0cma55m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBt6JueyZxDq7kLXSdQPohlLCZuOjPW-6c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432381053299-t5laa7q3tpared076ho21q23m0cma55m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

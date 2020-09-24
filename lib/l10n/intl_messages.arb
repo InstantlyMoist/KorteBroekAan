@@ -1,0 +1,113 @@
+{
+  "@@last_modified": "2020-09-23T17:54:04.089283",
+  "comingSoon": "Komt binnenkort...",
+  "@comingSoon": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "filter1": "Watje",
+  "@filter1": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "filter2": "Gemiddeld",
+  "@filter2": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "filter3": "Gedurfd",
+  "@filter3": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "filter4": "Piet Paulusma",
+  "@filter4": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "friday": "vr",
+  "@friday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "homeTitle": "Kan ik een korte broek aan?",
+  "@homeTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loadingSubtitle": "We vragen het even aan piet paulusma",
+  "@loadingSubtitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "monday": "ma",
+  "@monday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "notifications": "Dagelijkse Notificaties",
+  "@notifications": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "saturday": "za",
+  "@saturday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sensitivity": "Gevoeligheidsgraad",
+  "@sensitivity": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settings": "Instellingen",
+  "@settings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sunday": "zo",
+  "@sunday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "thursday": "do",
+  "@thursday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tuesday": "di",
+  "@tuesday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "unit": "Eenheid",
+  "@unit": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "wednesday": "wo",
+  "@wednesday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loadingTitle": "Kan je vandaag een korte broek aan?",
+  "@loadingTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noLocationTitle": "We hebben je locatie nodig!",
+  "@noLocationTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noLocationSubtitle": "Zonder locatie kunnen we geen weersvoorspelling geven...",
+  "@noLocationSubtitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noLocationButtonText": "Klik hier om naar je instellingen te gaan",
+  "@noLocationButtonText": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

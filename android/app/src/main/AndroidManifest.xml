@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="moldovo.kan_ik_een_korte_broek_aan">
+    <uses-permission android:name="android.permission.INTERNET"/>
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
          In most cases you can leave this as-is, but you if you want to provide
@@ -7,9 +8,12 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Kan ik een korte broek aan?"
+        android:label="KorteBroekAan"
         android:icon="@mipmap/ic_launcher">
         there is no splash screen (such as the default splash screen
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1364717858891314~7329627897"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -20,6 +24,9 @@
             <!-- This keeps the window background of the activity showing
                  until Flutter renders its first frame. It can be removed if
                  defined in @style/LaunchTheme). -->
+            <meta-data
+                android:name="firebase_analytics_collection_deactivated"
+                android:value="true" />
             <meta-data
                 android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
                 android:value="true" />

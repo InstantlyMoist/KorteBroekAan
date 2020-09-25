@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-09-23T17:54:04.089283",
+  "@@last_modified": "2020-09-25T16:20:11.695665",
   "comingSoon": "Komt binnenkort...",
   "@comingSoon": {
     "type": "text",
@@ -95,6 +95,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "share": "Delen",
+  "@share": {
+    "type": "text",
+    "placeholders": {}
+  },
   "noLocationTitle": "We hebben je locatie nodig!",
   "@noLocationTitle": {
     "type": "text",
@@ -107,6 +112,16 @@
   },
   "noLocationButtonText": "Klik hier om naar je instellingen te gaan",
   "@noLocationButtonText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "shareYes": "*Yes!* Vandaag kan je een korte broek aan!\n\nBen jij ook benieuwd of je een korte broek aan kunt doen?\nDownload dan snel de app op: bit.ly/KorteBroekAanAndroid",
+  "@shareYes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "shareNo": "*Helaas!* Vandaag kan je geen een korte broek aan...\n\nBen jij benieuwd wanneer je wel weer een korte broek aan kunt doen?\nDownload dan snel de app op: bit.ly/KorteBroekAanAndroid",
+  "@shareNo": {
     "type": "text",
     "placeholders": {}
   }

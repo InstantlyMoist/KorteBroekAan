@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/app_color.dart';
-import 'package:kan_ik_een_korte_broek_aan/data/localization_service.dart';
-import 'package:kan_ik_een_korte_broek_aan/data/preferences_service.dart';
-import 'package:kan_ik_een_korte_broek_aan/data/weather_service.dart';
+import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/localization_service.dart';
+import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/preferences_service.dart';
+import 'package:kan_ik_een_korte_broek_aan/services/weather_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/widgets/text/subtitle_text.dart';
 
 class SettingsToggle extends StatefulWidget {

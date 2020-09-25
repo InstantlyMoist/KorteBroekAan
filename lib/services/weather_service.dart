@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:collection';
 import 'package:flutter/cupertino.dart';
-import 'package:kan_ik_een_korte_broek_aan/data/localization_service.dart';
-import 'package:kan_ik_een_korte_broek_aan/data/preferences_service.dart';
+import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/localization_service.dart';
+import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/preferences_service.dart';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
 
@@ -24,7 +24,6 @@ class WeatherService {
   static loadWOEID(LocationData data) async {
     final String FIND_WOEID_URL =
         '${FIND_WOEID_BASE_URL}${data.latitude},${data.longitude}';
-    print(FIND_WOEID_URL);
     var response = await http.get(FIND_WOEID_URL);
     var decodedResponse = jsonDecode(response.body);
     return decodedResponse[0]['woeid'];
@@ -84,6 +83,7 @@ class WeatherService {
       case 6: return LocalizationService.of(context).saturday;
       case 7: return LocalizationService.of(context).sunday;
     }
+    return null;
   }
 }
 

@@ -1,10 +1,11 @@
 import 'dart:ui';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kan_ik_een_korte_broek_aan/components/faded_route_builder.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/app_color.dart';
-import 'package:kan_ik_een_korte_broek_aan/data/localization_service.dart';
+import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/localization_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/main.dart';
 import 'package:kan_ik_een_korte_broek_aan/screens/home_screen/components/header/header.dart';
 import 'package:location/location.dart' as loc;
@@ -35,6 +36,7 @@ class _NoLocationScreenStateState extends State<NoLocationScreenState> with Widg
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    FirebaseAnalytics().setCurrentScreen(screenName: "no_location");
   }
 
   @override
@@ -53,7 +55,7 @@ class _NoLocationScreenStateState extends State<NoLocationScreenState> with Widg
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Header(LocalizationService.of(context).noLocationTitle, LocalizationService.of(context).noLocationSubtitle),
+              Header(LocalizationService.of(context).noLocationTitle, LocalizationService.of(context).noLocationSubtitle, false),
               Expanded(
                 child: Image(
                   image: AssetImage("assets/images/no-man-plain.png"),
@@ -61,7 +63,6 @@ class _NoLocationScreenStateState extends State<NoLocationScreenState> with Widg
               ),
               FlatButton(
                 onPressed: () => {
-                  //DO it
                   openAppSettings(),
                 },
                 child: Text(LocalizationService.of(context).noLocationButtonText),

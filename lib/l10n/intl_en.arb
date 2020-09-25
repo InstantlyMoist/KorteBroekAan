@@ -100,6 +100,11 @@
 		"type": "text",
 		"placeholders": {}
 	},
+	"share": "Share",
+	"@share": {
+		"type": "text",
+		"placeholders": {}
+	},
 	"noLocationSubtitle": "Without a location we cannot provide a weather forecast ...",
 	"@noLocationSubtitle": {
 		"type": "text",
@@ -107,6 +112,16 @@
 	},
 	"noLocationButtonText": "Click here to go to your settings",
 	"@noLocationButtonText": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"shareYes": "*Yes!* You can wear shorts today!\n\nAre you wondering if you can wear shorts?\nDownload the app on: bit.ly/KorteBroekAanAndroid",
+	"@shareYes": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"shareNo": "*Oh no!* You can't wear shorts today...\n\nAre you wondering when you can wear shorts again?\nDownload the app on: bit.ly/KorteBroekAanAndroid",
+	"@shareNo": {
 		"type": "text",
 		"placeholders": {}
 	}

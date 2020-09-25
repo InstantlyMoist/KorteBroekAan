@@ -1,12 +1,14 @@
 import 'package:admob_flutter/admob_flutter.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kan_ik_een_korte_broek_aan/components/faded_route_builder.dart';
-import 'package:kan_ik_een_korte_broek_aan/data/ad_service.dart';
+import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/ad_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/app_color.dart';
-import 'package:kan_ik_een_korte_broek_aan/data/localization_service.dart';
-import 'package:kan_ik_een_korte_broek_aan/data/preferences_service.dart';
-import 'package:kan_ik_een_korte_broek_aan/data/weather_service.dart';
+import 'package:kan_ik_een_korte_broek_aan/services/share_service.dart';
+import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/localization_service.dart';
+import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/preferences_service.dart';
+import 'package:kan_ik_een_korte_broek_aan/services/weather_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/handlers/location_handler.dart';
 import 'package:kan_ik_een_korte_broek_aan/screens/home_screen/home_screen_state.dart';
 import 'package:kan_ik_een_korte_broek_aan/screens/no_location_screen/no_location_screen_state.dart';
@@ -57,6 +59,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
     await PreferencesService.init(woeID);;
     bool meetsRequirements = await WeatherService.loadWeatherData(woeID);
     this.meetsRequirements = meetsRequirements;
+    ShareService.init();
     dataReady = true;
   }
 
@@ -64,6 +67,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    FirebaseAnalytics().setCurrentScreen(screenName: "loading");
   }
 
   @override

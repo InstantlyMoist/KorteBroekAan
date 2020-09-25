@@ -1,18 +1,33 @@
+import 'dart:io';
+
 import 'package:admob_flutter/admob_flutter.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kan_ik_een_korte_broek_aan/components/faded_route_builder.dart';
-import 'package:kan_ik_een_korte_broek_aan/data/ad_service.dart';
+import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/ad_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/app_color.dart';
-import 'package:kan_ik_een_korte_broek_aan/data/localization_service.dart';
-import 'package:kan_ik_een_korte_broek_aan/data/preferences_service.dart';
-import 'package:kan_ik_een_korte_broek_aan/data/weather_service.dart';
+import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/localization_service.dart';
+import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/preferences_service.dart';
+import 'package:kan_ik_een_korte_broek_aan/services/weather_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/screens/home_screen/home_screen_state.dart';
 import 'package:kan_ik_een_korte_broek_aan/screens/settings_screen/components/settings_slider.dart';
 import 'package:kan_ik_een_korte_broek_aan/screens/settings_screen/components/settings_toggle.dart';
 import 'package:kan_ik_een_korte_broek_aan/widgets/text/title_text.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class SettingsScreenState extends StatelessWidget {
+class SettingsScreenState extends StatefulWidget {
+  @override
+  _SettingsScreenStateState createState() => _SettingsScreenStateState();
+}
+
+class _SettingsScreenStateState extends State<SettingsScreenState> {
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAnalytics().setCurrentScreen(screenName: "settings");
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -40,9 +55,10 @@ class SettingsScreenState extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).maybePop();
                       },
-                      child: Icon(Icons.arrow_back, color: WeatherService.getDay(0)
-                          ? AppColor.ORANGELIGHT.color
-                          : AppColor.BLUELIGHT.color),
+                      child: Icon(Icons.arrow_back,
+                          color: WeatherService.getDay(0)
+                              ? AppColor.ORANGELIGHT.color
+                              : AppColor.BLUELIGHT.color),
                     ),
                     SizedBox(
                       width: 10,
@@ -56,10 +72,46 @@ class SettingsScreenState extends StatelessWidget {
                   ],
                 ),
                 SettingsSlider(),
-                SettingsToggle(LocalizationService.of(context).unit, "°C", "°F", "celcius", false),
-                SettingsToggle(LocalizationService.of(context).notifications, "Aan", "Uit",
-                    "notifications", true),
+                SettingsToggle(LocalizationService.of(context).unit, "°C", "°F",
+                    "celcius", false),
+                SettingsToggle(LocalizationService.of(context).notifications,
+                    "Aan", "Uit", "notifications", true),
                 Spacer(),
+                Row(
+                  children: <Widget>[
+                    InkWell(
+                      borderRadius: BorderRadius.circular(90),
+                      onTap: () async {
+                        await launch("https://github.com/InstantlyMoist/KorteBroekAan");
+                      },
+                      child: Image(
+                        image: AssetImage("assets/images/github.png"),
+                        height: 38,
+                        width: 38,
+                        color: WeatherService.getDay(0)
+                            ? AppColor.ORANGELIGHT.color
+                            : AppColor.BLUELIGHT.color,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    InkWell(
+                      borderRadius: BorderRadius.circular(90),
+                      onTap: () async {
+                        await launch(Platform.isAndroid ? "https://play.google.com/store/apps/details?id=moldovo.kan_ik_een_korte_broek_aan" : "NOT_IMPLEMENTED");
+                      },
+                      child: Icon(Icons.star,
+                          size: 38,
+                          color: WeatherService.getDay(0)
+                              ? AppColor.ORANGELIGHT.color
+                              : AppColor.BLUELIGHT.color),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 AdmobBanner(
                   adUnitId: AdService.getBannerAdID(),
                   adSize: AdmobBannerSize.BANNER,

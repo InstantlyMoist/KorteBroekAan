@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kan_ik_een_korte_broek_aan/components/faded_route_builder.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/app_color.dart';
-import 'package:kan_ik_een_korte_broek_aan/data/weather_service.dart';
-import 'package:kan_ik_een_korte_broek_aan/main.dart';
+import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/localization_service.dart';
+import 'package:kan_ik_een_korte_broek_aan/services/weather_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/screens/home_screen/components/forecase_bar/forecast_item.dart';
 import 'package:kan_ik_een_korte_broek_aan/screens/settings_screen/settings_screen_state.dart';
 
@@ -36,6 +36,15 @@ class _ForecastBarState extends State<ForecastBar> {
     }
   }
 
+  void handleMenuTap(String value) {
+    if (value == "0") {
+      Navigator.of(context).pushAndRemoveUntil(
+          FadedRouteBuilder(page: SettingsScreenState()),
+          (Route<dynamic> route) => false);
+    }
+    print(value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -59,21 +68,17 @@ class _ForecastBarState extends State<ForecastBar> {
                     endIndent: 10,
                   ),
                   Container(
-                    margin: EdgeInsets.only(right: 10),
+                    padding: EdgeInsets.zero,
+                    width: 30,
                     child: IconButton(
-                      iconSize: 22,
                       padding: EdgeInsets.zero,
-                      constraints: BoxConstraints(),
                       onPressed: () {
                         Navigator.of(context).pushAndRemoveUntil(
                             FadedRouteBuilder(page: SettingsScreenState()),
-                            (Route<dynamic> route) => false);
+                                (Route<dynamic> route) => false);
                       },
-                      icon: Icon(
-                        Icons.settings,
-                        color: AppColor.BLUELIGHTERTHANDARK.color,
-                      ),
-                    ),
+                      icon: Icon(Icons.settings, color: AppColor.BLUELIGHTERTHANDARK.color,),
+                    )
                   ),
                 ],
               ),

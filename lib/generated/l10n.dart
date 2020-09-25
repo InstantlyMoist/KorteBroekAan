@@ -233,6 +233,16 @@ class S {
     );
   }
 
+  /// `Share`
+  String get share {
+    return Intl.message(
+      'Share',
+      name: 'share',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Without a location we cannot provide a weather forecast ...`
   String get noLocationSubtitle {
     return Intl.message(
@@ -248,6 +258,26 @@ class S {
     return Intl.message(
       'Click here to go to your settings',
       name: 'noLocationButtonText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `*Yes!* You can wear shorts today!\n\nAre you wondering if you can wear shorts?\nDownload the app on: bit.ly/KorteBroekAanAndroid`
+  String get shareYes {
+    return Intl.message(
+      '*Yes!* You can wear shorts today!\n\nAre you wondering if you can wear shorts?\nDownload the app on: bit.ly/KorteBroekAanAndroid',
+      name: 'shareYes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `*Oh no!* You can't wear shorts today...\n\nAre you wondering when you can wear shorts again?\nDownload the app on: bit.ly/KorteBroekAanAndroid`
+  String get shareNo {
+    return Intl.message(
+      '*Oh no!* You can\'t wear shorts today...\n\nAre you wondering when you can wear shorts again?\nDownload the app on: bit.ly/KorteBroekAanAndroid',
+      name: 'shareNo',
       desc: '',
       args: [],
     );

@@ -1,10 +1,13 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kan_ik_een_korte_broek_aan/components/faded_route_builder.dart';
 import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/ad_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/app_color.dart';
+import 'package:kan_ik_een_korte_broek_aan/services/database_service.dart';
+import 'package:kan_ik_een_korte_broek_aan/services/notification_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/services/share_service.dart';
 import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/localization_service.dart';
 import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/preferences_service.dart';
@@ -46,19 +49,26 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
   bool noLocation = false;
   Color currentColor = AppColor.ORANGELIGHT.color;
 
+  void fail() {
+    dataReady = true;
+    this.meetsRequirements = false;
+    noLocation = true;
+  }
+
   void init() async {
+    Firebase.initializeApp();
     Admob.initialize(AdService.getAdMobAppID());
+
     LocationData currentLocation = await LocationHandler.getLocation();
     if (currentLocation == null) {
-      dataReady = true;
-      this.meetsRequirements = false;
-      noLocation = true;
+      fail();
       return;
     }
     int woeID = await WeatherService.loadWOEID(currentLocation);
-    await PreferencesService.init(woeID);;
-    bool meetsRequirements = await WeatherService.loadWeatherData(woeID);
-    this.meetsRequirements = meetsRequirements;
+    await NotificationService.init();
+    await DatabaseService.init();
+    await PreferencesService.init(woeID);
+    this.meetsRequirements = await WeatherService.loadWeatherData(woeID);
     ShareService.init();
     dataReady = true;
   }

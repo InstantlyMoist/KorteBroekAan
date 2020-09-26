@@ -31,8 +31,8 @@ class _SettingsScreenStateState extends State<SettingsScreenState> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () {
-        PreferencesService.save();
+      onWillPop: () async {
+        await PreferencesService.save();
         WeatherService.handleResponse();
         Navigator.of(context).pushAndRemoveUntil(
             FadedRouteBuilder(page: HomeScreenState()),
@@ -75,7 +75,7 @@ class _SettingsScreenStateState extends State<SettingsScreenState> {
                 SettingsToggle(LocalizationService.of(context).unit, "°C", "°F",
                     "celcius", false),
                 SettingsToggle(LocalizationService.of(context).notifications,
-                    "Aan", "Uit", "notifications", true),
+                    "Aan", "Uit", "notifications", false),
                 Spacer(),
                 Row(
                   children: <Widget>[

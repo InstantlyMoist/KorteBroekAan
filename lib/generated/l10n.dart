@@ -33,6 +33,26 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `On`
+  String get on {
+    return Intl.message(
+      'On',
+      name: 'on',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Off`
+  String get off {
+    return Intl.message(
+      'Off',
+      name: 'off',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Coming soon...`
   String get comingSoon {
     return Intl.message(

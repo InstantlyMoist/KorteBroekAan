@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:collection';
 import 'package:flutter/cupertino.dart';
-import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/localization_service.dart';
-import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/preferences_service.dart';
+import 'package:kan_ik_een_korte_broek_aan/providers/localization_provider.dart';
+import 'package:kan_ik_een_korte_broek_aan/services/localization_service.dart';
+import 'package:kan_ik_een_korte_broek_aan/services/preferences_service.dart';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
 
@@ -42,7 +43,7 @@ class WeatherService {
     list = new LinkedList<WeatherEntry>();
     _currentTemp = _cachedResponse['consolidated_weather'][0]['the_temp'];
     for (var day in _cachedResponse['consolidated_weather']) {
-      list.add(WeatherEntry(meetsRequirements(day['the_temp'], isRain('weather_state_abbr'))));
+      list.add(WeatherEntry(meetsRequirements(day['the_temp'], isRain(day['weather_state_abbr']))));
     }
   }
 
@@ -53,8 +54,8 @@ class WeatherService {
   static bool meetsRequirements(double temp, bool raining) {
     double filterStrength = PreferencesService.filterStrength;
     if (filterStrength == 1) return false;
-    if (filterStrength == 2) return !raining && temp > 15;
-    if (filterStrength == 3) return !raining && temp > 10;
+    if (filterStrength == 2) return !raining && temp > 20;
+    if (filterStrength == 3) return !raining && temp > 15;
     else return true;
   }
 
@@ -65,23 +66,23 @@ class WeatherService {
         weatherState == "t" ||
         weatherState == "hr" ||
         weatherState == "lr" ||
-        weatherState == "S";
+        weatherState == "s";
   }
 
   static int getWeekDay(int weekDay) {
     return weekDay > 7 ? weekDay - 7 : weekDay;
   }
 
-  static String getWeekdayString(int weekDay, BuildContext context) {
+  static String getWeekdayString(int weekDay) {
     weekDay = getWeekDay(weekDay);
     switch (weekDay) {
-      case 1: return LocalizationService.of(context).monday;
-      case 2: return LocalizationService.of(context).tuesday;
-      case 3: return LocalizationService.of(context).wednesday;
-      case 4: return LocalizationService.of(context).thursday;
-      case 5: return LocalizationService.of(context).friday;
-      case 6: return LocalizationService.of(context).saturday;
-      case 7: return LocalizationService.of(context).sunday;
+      case 1: return LocalizationProvider.localizationService.monday;
+      case 2: return LocalizationProvider.localizationService.tuesday;
+      case 3: return LocalizationProvider.localizationService.wednesday;
+      case 4: return LocalizationProvider.localizationService.thursday;
+      case 5: return LocalizationProvider.localizationService.friday;
+      case 6: return LocalizationProvider.localizationService.saturday;
+      case 7: return LocalizationProvider.localizationService.sunday;
     }
     return null;
   }

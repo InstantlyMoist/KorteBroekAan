@@ -5,10 +5,10 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kan_ik_een_korte_broek_aan/components/faded_route_builder.dart';
-import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/ad_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/app_color.dart';
-import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/localization_service.dart';
-import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/preferences_service.dart';
+import 'package:kan_ik_een_korte_broek_aan/providers/localization_provider.dart';
+import 'package:kan_ik_een_korte_broek_aan/services/ad_service.dart';
+import 'package:kan_ik_een_korte_broek_aan/services/preferences_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/services/weather_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/screens/home_screen/home_screen_state.dart';
 import 'package:kan_ik_een_korte_broek_aan/screens/settings_screen/components/settings_slider.dart';
@@ -64,7 +64,7 @@ class _SettingsScreenStateState extends State<SettingsScreenState> {
                       width: 10,
                     ),
                     TitleText(
-                      text: LocalizationService.of(context).settings,
+                      text: LocalizationProvider.localizationService.settings,
                       color: WeatherService.getDay(0)
                           ? AppColor.ORANGELIGHT.color
                           : AppColor.BLUELIGHT.color,
@@ -72,10 +72,10 @@ class _SettingsScreenStateState extends State<SettingsScreenState> {
                   ],
                 ),
                 SettingsSlider(),
-                SettingsToggle(LocalizationService.of(context).unit, "°C", "°F",
+                SettingsToggle(LocalizationProvider.localizationService.unit, "°C", "°F",
                     "celcius", false),
-                SettingsToggle(LocalizationService.of(context).notifications,
-                    "Aan", "Uit", "notifications", false),
+                SettingsToggle(LocalizationProvider.localizationService.notifications,
+                  LocalizationProvider.localizationService.on, LocalizationProvider.localizationService.off, "notifications", false),
                 Spacer(),
                 Row(
                   children: <Widget>[

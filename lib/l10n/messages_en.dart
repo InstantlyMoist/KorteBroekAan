@@ -35,6 +35,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "noLocationSubtitle" : MessageLookupByLibrary.simpleMessage("Without a location we cannot provide a weather forecast ..."),
     "noLocationTitle" : MessageLookupByLibrary.simpleMessage("We need your location!"),
     "notifications" : MessageLookupByLibrary.simpleMessage("Daily Notifications"),
+    "off" : MessageLookupByLibrary.simpleMessage("Off"),
+    "on" : MessageLookupByLibrary.simpleMessage("On"),
     "saturday" : MessageLookupByLibrary.simpleMessage("sat"),
     "sensitivity" : MessageLookupByLibrary.simpleMessage("Sensitivity"),
     "settings" : MessageLookupByLibrary.simpleMessage("Settings"),

@@ -7,8 +7,9 @@ class LocalizationService {
   LocalizationService(this.localeName);
 
   static Future<LocalizationService> load(Locale locale) {
-    final String name =
-        locale.countryCode?.isEmpty ?? false ? locale.languageCode : locale.toString();
+    final String name = locale.countryCode?.isEmpty ?? false
+        ? locale.languageCode
+        : locale.toString();
     final String localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       return LocalizationService(localeName);
@@ -20,6 +21,22 @@ class LocalizationService {
   }
 
   final String localeName;
+
+  String get on {
+    return Intl.message(
+      "Aan",
+      name: "on",
+      locale: localeName,
+    );
+  }
+
+  String get off {
+    return Intl.message(
+      "Uit",
+      name: "off",
+      locale: localeName,
+    );
+  }
 
   String get comingSoon {
     return Intl.message(
@@ -207,18 +224,16 @@ class LocalizationService {
 
   String get shareYes {
     return Intl.message(
-      "*Yes!* Vandaag kan je een korte broek aan!\n\nBen jij ook benieuwd of je een korte broek aan kunt doen?\nDownload dan snel de app op: bit.ly/KorteBroekAanAndroid",
-      name: "shareYes",
-      locale: localeName
-    );
+        "*Yes!* Vandaag kan je een korte broek aan!\n\nBen jij ook benieuwd of je een korte broek aan kunt doen?\nDownload dan snel de app op: bit.ly/KorteBroekAanAndroid",
+        name: "shareYes",
+        locale: localeName);
   }
 
   String get shareNo {
     return Intl.message(
         "*Helaas!* Vandaag kan je geen een korte broek aan...\n\nBen jij benieuwd wanneer je wel weer een korte broek aan kunt doen?\nDownload dan snel de app op: bit.ly/KorteBroekAanAndroid",
         name: "shareNo",
-        locale: localeName
-    );
+        locale: localeName);
   }
 }
 

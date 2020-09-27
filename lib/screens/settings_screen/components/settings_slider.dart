@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/app_color.dart';
-import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/localization_service.dart';
-import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/preferences_service.dart';
+import 'package:kan_ik_een_korte_broek_aan/providers/localization_provider.dart';
+import 'package:kan_ik_een_korte_broek_aan/services/preferences_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/services/weather_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/widgets/text/subtitle_text.dart';
 
@@ -17,10 +17,10 @@ class _SettingsSliderState extends State<SettingsSlider> {
   double _value = 1;
 
   String getFilterName() {
-    if (_value == 1) return LocalizationService.of(context).filter1;
-    if (_value == 2) return LocalizationService.of(context).filter2;
-    if (_value == 3) return LocalizationService.of(context).filter3;
-    else return LocalizationService.of(context).filter4;
+    if (_value == 1) return LocalizationProvider.localizationService.filter1;
+    if (_value == 2) return LocalizationProvider.localizationService.filter2;
+    if (_value == 3) return LocalizationProvider.localizationService.filter3;
+    else return LocalizationProvider.localizationService.filter4;
   }
 
   @override
@@ -38,7 +38,7 @@ class _SettingsSliderState extends State<SettingsSlider> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Subtitletext(text: LocalizationService.of(context).sensitivity, color: WeatherService.getDay(0) ? AppColor.ORANGELIGHT.color : AppColor.BLUELIGHT.color,),
+              Subtitletext(text: LocalizationProvider.localizationService.sensitivity, color: WeatherService.getDay(0) ? AppColor.ORANGELIGHT.color : AppColor.BLUELIGHT.color,),
               Subtitletext(text: getFilterName(), color: WeatherService.getDay(0) ? AppColor.ORANGELIGHT.color : AppColor.BLUELIGHT.color,),
             ],
           ),

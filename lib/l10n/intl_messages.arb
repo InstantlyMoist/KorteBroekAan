@@ -1,5 +1,15 @@
 {
-  "@@last_modified": "2020-09-25T16:20:11.695665",
+  "@@last_modified": "2020-09-27T17:01:56.120664",
+  "on": "Aan",
+  "@on": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "off": "Uit",
+  "@off": {
+    "type": "text",
+    "placeholders": {}
+  },
   "comingSoon": "Komt binnenkort...",
   "@comingSoon": {
     "type": "text",

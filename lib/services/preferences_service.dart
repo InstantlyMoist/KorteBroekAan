@@ -9,6 +9,7 @@ class PreferencesService {
   static double _lastWOEID;
   static bool _celcius;
   static bool _notifications;
+  static bool _notificationsToggled;
 
   static Future<void> init(int woeID) async {
     _sharedPreferences = await SharedPreferences.getInstance();
@@ -16,23 +17,15 @@ class PreferencesService {
     _celcius = _sharedPreferences.getBool("celcius") ?? true;
     _notifications = _sharedPreferences.getBool("notifications") ?? false;
     _lastWOEID = _sharedPreferences.getDouble("last_WOEID") ?? woeID.toDouble();
-    double savedWOEID = await DatabaseService.getWOEID();
-    if (notifications) {
-      _lastWOEID = woeID.toDouble();
-      if (savedWOEID == 0 || savedWOEID != _lastWOEID) {
-        if (_lastWOEID != savedWOEID) {
-          NotificationService.unsubscribe(); // Now irrelevant
-          NotificationService.subscribe(_lastWOEID);
-          await DatabaseService.setWOEID(_lastWOEID);
-        }
-      }
+    _notificationsToggled = false;
+    if (_notifications) {
+      NotificationService.unsubscribe();
+      NotificationService.subscribe(_lastWOEID);
+      await DatabaseService.setWOEID(_lastWOEID);
     } else {
-      if (savedWOEID != 0) {
-        await NotificationService.unsubscribe();
-        await DatabaseService.setWOEID(0);
-      }
+      NotificationService.unsubscribe();
+      await DatabaseService.removeWOEID(_lastWOEID);
     }
-
     save();
   }
 
@@ -41,22 +34,18 @@ class PreferencesService {
     _sharedPreferences.setDouble("last_WOEID", _lastWOEID);
     _sharedPreferences.setBool("celcius", _celcius);
     _sharedPreferences.setBool("notifications", _notifications);
-    double WOEID = await DatabaseService.getWOEID();
-    print(WOEID);
-    print(_lastWOEID);
+
+    if (!_notificationsToggled) return;
+
     if (_notifications) {
-      print("notifications are now $_notifications");
-      if (WOEID == 0.0) {
-        print("subscribing and shit");
         await DatabaseService.setWOEID(_lastWOEID);
         NotificationService.subscribe(_lastWOEID);
-      }
     } else {
-      if (WOEID != 0.0) {
-        await DatabaseService.removeWOEID();
-        NotificationService.unsubscribe();
-      }
+      await DatabaseService.removeWOEID(_lastWOEID);
+      NotificationService.unsubscribe();
     }
+
+    _notificationsToggled = false;
   }
 
   static bool getByName(String name) {
@@ -67,9 +56,10 @@ class PreferencesService {
   }
 
   static void toggleByName(String name) {
-    if (name == 'notifications')
+    if (name == 'notifications') {
+      _notificationsToggled = true;
       notifications = !notifications;
-    else
+    } else
       celcius = !celcius;
   }
 

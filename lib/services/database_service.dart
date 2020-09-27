@@ -2,42 +2,39 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info/device_info.dart';
+import 'package:kan_ik_een_korte_broek_aan/data/device_id.dart';
 
 class DatabaseService {
   static FirebaseFirestore _db;
+
+  static CollectionReference _woeids;
+
   static CollectionReference _devices;
   static DocumentReference _device;
 
   static Future<void> init() async {
     _db = FirebaseFirestore.instance;
-    _devices = _db.collection("devices");
-    _device = _devices.doc(await _getId());
-    return;
-  }
+    _woeids = _db.collection("woeids");
 
-  static Future<String> _getId() async {
-    var deviceInfo = DeviceInfoPlugin();
-    if (Platform.isIOS) {
-      var iosDeviceInfo = await deviceInfo.iosInfo;
-      return iosDeviceInfo.identifierForVendor;
-    } else {
-      var androidDeviceInfo = await deviceInfo.androidInfo;
-      return androidDeviceInfo.androidId;
-    }
+    _devices = _db.collection("devices");
+    _device = _devices.doc(await DeviceId.getDeviceId());
+    return;
   }
 
   static Future<void> setWOEID(double WOEID) async {
-    await _device.set({"WOEID": WOEID});
+    DocumentReference reference = _woeids.doc(WOEID.toInt().toString());
+    reference.set({
+      "users": FieldValue.arrayUnion([await DeviceId.getDeviceId()])
+    }, SetOptions(merge: true));
     return;
   }
 
-  static Future<void> removeWOEID() async {
-    return await _device.delete();
-  }
-
-  static Future<double> getWOEID() async {
-    DocumentSnapshot response = await _device.get();
-    if (!response.exists) return 0;
-    return await response.get('WOEID').toDouble();
+  static Future<void> removeWOEID(double WOEID) async {
+    DocumentReference reference = _woeids.doc(WOEID.toInt().toString());
+    String deviceId = await DeviceId.getDeviceId();
+    reference.set({
+      "users": FieldValue.arrayRemove([deviceId])
+    }, SetOptions(merge: true));
+    return;
   }
 }

@@ -1,7 +1,7 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kan_ik_een_korte_broek_aan/services/localization_service.dart';
-import 'package:kan_ik_een_korte_broek_aan/services/share_service.dart';
+import 'package:kan_ik_een_korte_broek_aan/providers/localization_provider.dart';
 import 'package:kan_ik_een_korte_broek_aan/services/weather_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/widgets/text/subtitle_text.dart';
 import 'package:kan_ik_een_korte_broek_aan/widgets/text/title_text.dart';
@@ -11,8 +11,9 @@ class Header extends StatelessWidget {
   final String _titleText;
   final String _subTitleText;
   bool _shareable = false;
+  bool _multiline;
 
-  Header(this._titleText, this._subTitleText, this._shareable);
+  Header(this._titleText, this._subTitleText, this._shareable, this._multiline);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class Header extends StatelessWidget {
         ),
         Row(
           children: <Widget>[
-            Subtitletext(text: _subTitleText),
+            Subtitletext(text: _subTitleText, multiline: _multiline,),
             SizedBox(
               width: 10,
             ),
@@ -37,11 +38,10 @@ class Header extends StatelessWidget {
                     child: IconButton(
                       padding: EdgeInsets.zero,
                       onPressed: () {
-                        print(ShareService.shareYes);
+                        FirebaseAnalytics().logEvent(name: "share");
                         Share.share(WeatherService.getDay(0)
-                            ? ShareService.shareYes
-                            : ShareService.shareNo);
-                        // actually share shit
+                            ? LocalizationProvider.localizationService.shareYes
+                            : LocalizationProvider.localizationService.shareNo);
                       },
                       icon: Icon(
                         Icons.share,

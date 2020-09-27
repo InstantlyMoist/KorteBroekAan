@@ -2,8 +2,8 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/app_color.dart';
-import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/localization_service.dart';
-import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/preferences_service.dart';
+import 'package:kan_ik_een_korte_broek_aan/providers/localization_provider.dart';
+import 'package:kan_ik_een_korte_broek_aan/services/preferences_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/services/weather_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/screens/home_screen/components/forecase_bar/forecast_bar.dart';
 import 'package:kan_ik_een_korte_broek_aan/screens/home_screen/components/header/header.dart';
@@ -36,9 +36,9 @@ class _HomeScreenStateState extends State<HomeScreenState> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Header(
-                  LocalizationService.of(context).homeTitle,
+                  LocalizationProvider.localizationService.homeTitle,
                   "${WeatherService.getCurrentTemp().toStringAsFixed(1)}${PreferencesService.celcius ? "°C" : "°F"}",
-                  true),
+                  true, false),
               Expanded(child: WeatherImage()),
               ForecastBar()
             ],

@@ -1,5 +1,15 @@
 {
 	"@@last_modified": "2020-09-23T16:25:24.112278",
+	"on": "On",
+	"@on": {
+		"type": "text",
+		"placeholders": {}
+	},
+	"off": "Off",
+	"@off": {
+		"type": "text",
+		"placeholders": {}
+	},
 	"comingSoon": "Coming soon...",
 	"@comingSoon": {
 		"type": "text",

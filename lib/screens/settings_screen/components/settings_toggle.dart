@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:kan_ik_een_korte_broek_aan/data/app_color.dart';
-import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/localization_service.dart';
-import 'file:///C:/Users/Kylli/StudioProjects/KorteBroekAan/lib/services/preferences_service.dart';
+import 'package:kan_ik_een_korte_broek_aan/providers/localization_provider.dart';
+import 'package:kan_ik_een_korte_broek_aan/services/preferences_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/services/weather_service.dart';
 import 'package:kan_ik_een_korte_broek_aan/widgets/text/subtitle_text.dart';
 
@@ -41,7 +41,7 @@ class _SettingsToggleState extends State<SettingsToggle> {
           widget.comingSoon
               ? Container(
                   child: Subtitletext(
-                      text: LocalizationService.of(context).comingSoon,
+                      text: LocalizationProvider.localizationService.comingSoon,
                       color: WeatherService.getDay(0)
                           ? AppColor.ORANGELIGHT.color
                           : AppColor.BLUELIGHT.color),
